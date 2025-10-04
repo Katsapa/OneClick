@@ -1,0 +1,6 @@
+rootProject.name = 'OneClick'
+include 'Core'
+include 'ActionImplementation'
+include 'Trigger'
+include 'Listeners'
+
