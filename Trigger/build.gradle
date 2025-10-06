@@ -9,9 +9,11 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation project(":Core")
 
+dependencies {
+    implementation project(':Core')
+
+    createArtifactResolutionQuery()
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

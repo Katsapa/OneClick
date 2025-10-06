@@ -10,6 +10,8 @@ public class RegisterNativeHook implements NativeKeyListener {
 
     private static RegisterNativeHook instance;
     private RegisterNativeHook(){}
+    private String currentCombination;
+    private MacroManager macroManager = MacroManager.getMacroManager();
 
     public static RegisterNativeHook getInstance(){
         if(instance == null){
@@ -32,11 +34,13 @@ public class RegisterNativeHook implements NativeKeyListener {
     }
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        // Вызывается при НАЖАТИИ клавиши
-        String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
-        System.out.println("Нажата: " + keyText + " (код: " + e.getKeyCode() + ")");
 
-        // Пример обработки специальных клавиш
+        String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
+        currentCombination += keyText;
+        if(macroManager.getListOfTriggers().contains(currentCombination)){
+            System.out.println("Нажата комбинация: " + currentCombination);
+        }
+
         if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
             System.out.println("Выход по ESC...");
             try {
@@ -46,19 +50,27 @@ public class RegisterNativeHook implements NativeKeyListener {
             }
             System.exit(0);
         }
+
+
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
-        // Вызывается при ОТПУСКАНИИ клавиши
+//        if(keyText.equals(currentCombination.substring(currentCombination.length()-1))){
+//            currentCombination = currentCombination.substring(0, currentCombination.length()-1)
+//        } else {
+//            currentCombination == null;
+//        }
         String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
+        currentCombination = null;
         System.out.println("Отпущена: " + keyText);
     }
 
-    @Override
-    public void nativeKeyTyped(NativeKeyEvent e) {
-        // Вызывается при вводе символа (учитывает раскладку)
-        System.out.println("Введен символ: '" + e.getKeyChar() + "'");
-    }
+//    @Override
+//    public void nativeKeyTyped(NativeKeyEvent e) {
+//        // Вызывается при вводе символа (учитывает раскладку)
+//        System.out.println("Введен символ: '" + e.getKeyChar() + "'");
+//    }
 }
+
 
