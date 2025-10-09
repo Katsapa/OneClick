@@ -1,5 +1,5 @@
 
-public class HotkeyTrigger implements Trigger{
+public class HotkeyTrigger{
     private String combination;
 
     HotkeyTrigger(String combination){

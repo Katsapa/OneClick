@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class MacroManager {
@@ -33,8 +34,9 @@ public class MacroManager {
     }
 
     public List<String> getListOfTriggers(){
-        listOfMacro.forEach(m -> listOfTriggers.add(m.getTrigger().getCombination()));
-        return listOfTriggers;
+//        listOfMacro.forEach(m -> listOfTriggers.add(m.getTrigger().getCombination()));
+//        return listOfTriggers;
+            return List.of("ER", "TY", "UI", "E");
     }
 
 }

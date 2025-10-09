@@ -10,8 +10,8 @@ public class RegisterNativeHook implements NativeKeyListener {
 
     private static RegisterNativeHook instance;
     private RegisterNativeHook(){}
-    private String currentCombination;
-    private MacroManager macroManager = MacroManager.getMacroManager();
+    private final StringBuilder currentCombination = new StringBuilder();
+    private final MacroManager macroManager = MacroManager.getMacroManager();
 
     public static RegisterNativeHook getInstance(){
         if(instance == null){
@@ -36,8 +36,9 @@ public class RegisterNativeHook implements NativeKeyListener {
     public void nativeKeyPressed(NativeKeyEvent e) {
 
         String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
-        currentCombination += keyText;
-        if(macroManager.getListOfTriggers().contains(currentCombination)){
+        currentCombination.append(keyText);
+
+        if(macroManager.getListOfTriggers().contains(currentCombination.toString())){
             System.out.println("Нажата комбинация: " + currentCombination);
         }
 
@@ -62,7 +63,7 @@ public class RegisterNativeHook implements NativeKeyListener {
 //            currentCombination == null;
 //        }
         String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
-        currentCombination = null;
+        currentCombination.delete(0, currentCombination.length());
         System.out.println("Отпущена: " + keyText);
     }
 
