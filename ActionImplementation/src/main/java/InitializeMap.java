@@ -14,9 +14,7 @@ public class InitializeMap {
         for (char c = 'A'; c <= 'Z'; c++) {
             keyMap.put(String.valueOf(c), KeyEvent.getExtendedKeyCodeForChar(c));
         }
-        for (char c = 'a'; c <= 'z'; c++) {
-            keyMap.put(String.valueOf(c), KeyEvent.getExtendedKeyCodeForChar(c));
-        }
+
 
 
         for (char c = '0'; c <= '9'; c++) {

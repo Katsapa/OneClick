@@ -3,6 +3,7 @@ import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
+import java.awt.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -40,6 +41,9 @@ public class RegisterNativeHook implements NativeKeyListener {
 
         if(macroManager.getListOfTriggers().contains(currentCombination.toString())){
             System.out.println("Нажата комбинация: " + currentCombination);
+            PlaybackService service = new PlaybackService();
+            Thread thread = new Thread(service);
+            thread.start();
         }
 
         if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
@@ -57,11 +61,6 @@ public class RegisterNativeHook implements NativeKeyListener {
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
-//        if(keyText.equals(currentCombination.substring(currentCombination.length()-1))){
-//            currentCombination = currentCombination.substring(0, currentCombination.length()-1)
-//        } else {
-//            currentCombination == null;
-//        }
         String keyText = NativeKeyEvent.getKeyText(e.getKeyCode());
         currentCombination.delete(0, currentCombination.length());
         System.out.println("Отпущена: " + keyText);
