@@ -21,6 +21,15 @@ public class MacroManager {
         m.getTrigger().activate();
     }
 
+    public Macro getMacroForTrigger(String combination){
+        for(Macro m : listOfMacro){
+            if(m.getTrigger().getCombination().equals(combination)){
+                return m;
+            }
+        }
+        return null;
+    }
+
     public void stopMacro(Macro m){
         m.getTrigger().deactivate();
     }
@@ -34,9 +43,8 @@ public class MacroManager {
     }
 
     public List<String> getListOfTriggers(){
-//        listOfMacro.forEach(m -> listOfTriggers.add(m.getTrigger().getCombination()));
-//        return listOfTriggers;
-            return List.of("ER", "TY", "UI", "E");
+        listOfMacro.forEach(m -> listOfTriggers.add(m.getTrigger().getCombination().toUpperCase()));
+        return listOfTriggers;
     }
 
 }

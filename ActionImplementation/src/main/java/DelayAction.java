@@ -4,12 +4,6 @@ public class DelayAction implements Action{
         delayInMillis = sec;
     }
     public void execute() {
-        try{
-            Thread.currentThread().sleep(delayInMillis);
-        } catch (InterruptedException e){
-            System.out.println(e.getMessage());
-            Thread.currentThread().interrupt();
-        }
+        RobotAndListController.getRobot().delay(delayInMillis);
     }
-
 }

@@ -41,7 +41,8 @@ public class RegisterNativeHook implements NativeKeyListener {
 
         if(macroManager.getListOfTriggers().contains(currentCombination.toString())){
             System.out.println("Нажата комбинация: " + currentCombination);
-            PlaybackService service = new PlaybackService();
+
+            PlaybackService service = new PlaybackService(MacroManager.getMacroManager().getMacroForTrigger(currentCombination.toString()));
             Thread thread = new Thread(service);
             thread.start();
         }

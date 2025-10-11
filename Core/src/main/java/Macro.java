@@ -1,22 +1,18 @@
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Macro {
     private String name;
     private String description;
     private HotkeyTrigger trigger;
-    private ArrayList<Action> actions;
-    public Macro(String name, String description, HotkeyTrigger trigger, ArrayList<Action> actions){
+    private List<Action> actions;
+    public Macro(String name, String description, HotkeyTrigger trigger, List<Action> actions){
         this.name = name;
         this.description = description;
         this.trigger = trigger;
         this.actions = actions;
     }
-
-    public static void createMacro(Macro macro){
-
-    }
-
-
     public String getName(){
         return name;
     }
@@ -32,7 +28,7 @@ public class Macro {
         this.description = description;
     }
 
-    public HotkeyTrigger getTrigger() {
+    public Trigger getTrigger() {
         return trigger;
     }
 
@@ -40,11 +36,11 @@ public class Macro {
         this.trigger = trigger;
     }
 
-    public ArrayList<Action> getActions() {
+    public List<Action> getActions() {
         return actions;
     }
 
-    public void setActions(ArrayList<Action> actions) {
+    public void setActions(List<Action> actions) {
         this.actions = actions;
     }
 }

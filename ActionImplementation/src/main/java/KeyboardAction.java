@@ -8,9 +8,9 @@ public class KeyboardAction implements Action{
     int sec;
 
     private final Object lock = new Object();
-    private boolean signal = false;
+
     int keyCode;
-    static List<String> mods = List.of("continued", "click", "temp");
+    static List<String> mods = List.of("press", "click", "temp");
 
 
     KeyboardAction(String value, String mod) {
@@ -20,7 +20,7 @@ public class KeyboardAction implements Action{
         }
         this.mod = mod;
         this.value = value;
-        this.robot = RobotController.getRobot();
+        this.robot = RobotAndListController.getRobot();
     }
     KeyboardAction(String value, String mod, int sec) {
         if(!mods.contains(mod)){
@@ -28,14 +28,14 @@ public class KeyboardAction implements Action{
         }
         this.mod = mod;
         this.value = value;
-        this.robot = RobotController.getRobot();
+        this.robot = RobotAndListController.getRobot();
         this.sec = sec;
     }
 
     public void execute() throws InterruptedException{
         if(InitializeMap.getKeyMap().containsKey(value.toUpperCase())){
             if(mod.equals(mods.get(0))){
-                this.continuousExecute();
+                this.pressKey();
             } else if(mod.equals(mods.get(1))){
                 this.clickExecute();
             } else {
@@ -49,11 +49,7 @@ public class KeyboardAction implements Action{
     private void tempClicking(int sec){
         keyCode = InitializeMap.getKeyMap().get(value);
         robot.keyPress(keyCode);
-        try{
-            Thread.currentThread().sleep(sec);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        robot.delay(sec);
         robot.keyRelease(keyCode);
     }
 
@@ -64,33 +60,9 @@ public class KeyboardAction implements Action{
         robot.keyRelease(keyCode);
     }
 
-    private void continuousExecute() throws InterruptedException{
+    private void pressKey(){
         keyCode = InitializeMap.getKeyMap().get(value);
         robot.keyPress(keyCode);
-
-        synchronized (lock){
-            while(!signal){
-                lock.wait();
-            }
-        }
-        robot.keyRelease(keyCode);
-    }
-
-    public void signalForRelease(){
-        synchronized (lock){
-            signal = true;
-            lock.notify();
-        }
-    }
-
-    public boolean getSignal() {
-        return signal;
-    }
-
-    public void setSignal(boolean signal) {
-        this.signal = signal;
-    }
-    public Object getLock(){
-        return lock;
+        RobotAndListController.getKeyboardList().add(value);
     }
 }
