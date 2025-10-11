@@ -5,8 +5,7 @@ import java.util.List;
 public class RobotAndListController {
     private RobotAndListController(){}
     private static Robot robot;
-    private static List<String> pressedKeyList = new ArrayList<>();
-    private static List<Integer> pressedBottonList = new ArrayList<>();
+
 
     public static Robot getRobot() {
         if(robot == null){
@@ -24,11 +23,4 @@ public class RobotAndListController {
         return robot;
     }
 
-    public static List<String> getKeyboardList(){
-        return pressedKeyList;
-    }
-
-    public static List<Integer> getMouseList(){
-        return pressedBottonList;
-    }
 }

@@ -1,10 +1,11 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MacroManager {
-    private static MacroManager macroManager = new MacroManager();
-    private List<Macro> listOfMacro;
-    private List<String> listOfTriggers;
+    private final static MacroManager macroManager = new MacroManager();
+    private List<Macro> listOfMacro = new ArrayList<>();
+    private List<String> listOfTriggers = new ArrayList<>();
     public void addMacro(Macro m){
         listOfMacro.add(m);
     }

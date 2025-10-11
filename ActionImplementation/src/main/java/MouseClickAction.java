@@ -31,7 +31,7 @@ public class MouseClickAction implements Action{
 
     public void pressMouse(){
         robot.mousePress(mouseSide);
-        RobotAndListController.getMouseList().add(mouseSide);
+        ListController.getMouseList().add(mouseSide);
     }
 
     private void click(){

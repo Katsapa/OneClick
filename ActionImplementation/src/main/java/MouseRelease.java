@@ -5,13 +5,13 @@ public class MouseRelease implements Action{
     Robot robot = RobotAndListController.getRobot();
 
     MouseRelease(int mouseSide){
-        if(RobotAndListController.getMouseList().contains(mouseSide)){
+        if(ListController.getMouseList().contains(mouseSide)){
             this.mouseSide = mouseSide;
         }
     }
 
     public void execute(){
-        robot.keyPress(mouseSide);
         robot.mouseRelease(mouseSide);
+        ListController.getMouseList().remove(mouseSide);
     }
 }

@@ -18,7 +18,6 @@ public class Main implements NativeKeyListener {
         MacroBuilder builder = new MacroBuilder();
         HotkeyTrigger trigger = new HotkeyTrigger("RB");
         List<Action> actions = new ArrayList<>();
-
         actions.add(new KeyboardAction("R", "press"));
         actions.add(new TextInputAction("text"));
         actions.add(new KeyboardRelease("R"));

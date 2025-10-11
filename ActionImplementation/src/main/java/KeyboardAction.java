@@ -62,7 +62,7 @@ public class KeyboardAction implements Action{
 
     private void pressKey(){
         keyCode = InitializeMap.getKeyMap().get(value);
+        ListController.getKeyboardList().add(value);
         robot.keyPress(keyCode);
-        RobotAndListController.getKeyboardList().add(value);
     }
 }
