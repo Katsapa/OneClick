@@ -1,6 +1,7 @@
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
+import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +19,11 @@ public class Main implements NativeKeyListener {
         MacroBuilder builder = new MacroBuilder();
         HotkeyTrigger trigger = new HotkeyTrigger("RB");
         List<Action> actions = new ArrayList<>();
-        actions.add(new KeyboardAction("R", "press"));
-        actions.add(new TextInputAction("text"));
-        actions.add(new KeyboardRelease("R"));
+        actions.add(new MouseClickAction(1, "double click"));
+
 
         builder.setName("First macro");
-        builder.setDescription("test");
+
         builder.setTrigger(trigger);
         builder.setActions(actions);
         Macro macro = builder.getResult();

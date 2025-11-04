@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.util.List;
 
 public class MouseClickAction implements Action{
@@ -9,23 +10,33 @@ public class MouseClickAction implements Action{
 
     MouseClickAction(int mouseSide, String mod){
         if(!mods.contains(mod)){
-            return;
+            throw new IllegalArgumentException("Not exists mod");
         }
         this.mod = mod;
-        this.mouseSide = mouseSide;
+        this.mouseSide = translateOnInputEvent(mouseSide);
+        this.robot = RobotAndListController.getRobot();
+    }
+
+    private static int translateOnInputEvent(int value){
+        switch(value){
+            case 1:
+                return InputEvent.BUTTON1_DOWN_MASK;
+            case 2:
+                return InputEvent.BUTTON2_DOWN_MASK;
+            case 3:
+                return InputEvent.BUTTON3_DOWN_MASK;
+            default:
+                throw new IllegalArgumentException("Not existed mouse button");
+        }
     }
 
     public void execute(){
-        if(mouseSide > 0 && mouseSide < 3){
-            if(mod.equals(mods.get(0))){
-                doubleClick();
-            } else if(mod.equals(mods.get(1))){
-                click();
-            } else {
-                pressMouse();
-            }
+        if(mod.equals(mods.get(0))){
+            doubleClick();
+        } else if(mod.equals(mods.get(1))){
+            click();
         } else {
-            System.out.println("Incorrect: going beyond the range of value mouse button");
+            pressMouse();
         }
     }
 
@@ -40,9 +51,9 @@ public class MouseClickAction implements Action{
     }
 
     private void doubleClick(){
-        robot.keyPress(mouseSide);
-        robot.keyPress(mouseSide);
+        robot.mousePress(mouseSide);
         robot.mouseRelease(mouseSide);
+        robot.mousePress(mouseSide);
         robot.mouseRelease(mouseSide);
     }
 }

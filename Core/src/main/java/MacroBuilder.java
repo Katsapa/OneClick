@@ -2,18 +2,12 @@ import java.util.List;
 
 public class MacroBuilder implements Builder{
     private String name;
-    private String description;
     private HotkeyTrigger trigger;
     private List<Action> actions;
 
     @Override
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
@@ -27,6 +21,6 @@ public class MacroBuilder implements Builder{
     }
 
     public Macro getResult(){
-        return new Macro(name, description, trigger, actions);
+        return new Macro(name, trigger, actions);
     }
 }

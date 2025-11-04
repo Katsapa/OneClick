@@ -7,6 +7,8 @@ public class MouseRelease implements Action{
     MouseRelease(int mouseSide){
         if(ListController.getMouseList().contains(mouseSide)){
             this.mouseSide = mouseSide;
+        } else {
+            throw new IllegalArgumentException("illegal argument on the mouse release execute method");
         }
     }
 
